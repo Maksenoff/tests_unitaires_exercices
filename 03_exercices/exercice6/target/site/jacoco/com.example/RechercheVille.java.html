@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RechercheVille.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">exercice6</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">RechercheVille.java</span></div><h1>RechercheVille.java</h1><pre class="source lang-java linenums">package com.example;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class RechercheVille {
+
+    private List&lt;String&gt; villes;
+
+<span class="fc" id="L11">    public RechercheVille() {</span>
+<span class="fc" id="L12">        villes = Arrays.asList(</span>
+            &quot;Paris&quot;, &quot;Budapest&quot;, &quot;Skopje&quot;, &quot;Rotterdam&quot;, &quot;Valence&quot;,
+            &quot;Vancouver&quot;, &quot;Amsterdam&quot;, &quot;Vienne&quot;, &quot;Sydney&quot;, &quot;New York&quot;,
+            &quot;Londres&quot;, &quot;Bangkok&quot;, &quot;Hong Kong&quot;, &quot;Dubaï&quot;, &quot;Rome&quot;, &quot;Istanbul&quot;
+        );
+<span class="fc" id="L17">    }</span>
+
+    public List&lt;String&gt; Rechercher(String mot) {
+<span class="fc bfc" id="L20" title="All 4 branches covered.">        if (mot != null &amp;&amp; mot.equals(&quot;*&quot;)) {</span>
+<span class="fc" id="L21">            return new ArrayList&lt;&gt;(villes);</span>
+        }
+
+<span class="fc bfc" id="L24" title="All 4 branches covered.">        if (mot == null || mot.length() &lt; 2) {</span>
+<span class="fc" id="L25">            throw new NotFoundException(&quot;Recherche trop courte&quot;);</span>
+        }
+
+<span class="fc" id="L28">        List&lt;String&gt; resultats = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L29">        String motLower = mot.toLowerCase();</span>
+
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        for (String ville : villes) {</span>
+<span class="fc" id="L32">            String villeLower = ville.toLowerCase();</span>
+<span class="fc" id="L33">            boolean found = villeLower.contains(motLower);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            if (found) {</span>
+<span class="fc" id="L35">                resultats.add(ville);</span>
+            }
+<span class="fc" id="L37">        }</span>
+
+<span class="fc" id="L39">        return resultats;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
