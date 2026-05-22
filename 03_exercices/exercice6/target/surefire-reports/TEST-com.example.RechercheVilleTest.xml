@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.example.RechercheVilleTest" time="0.692" tests="8" errors="0" skipped="0" failures="0" flakes="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.example.RechercheVilleTest" time="0.343" tests="7" errors="0" skipped="0" failures="0" flakes="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -14,7 +14,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.18.8-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\makse\AppData\Local\Temp\surefire4370666334231103780\surefirebooter-20260522153050147_3.jar C:\Users\makse\AppData\Local\Temp\surefire4370666334231103780 2026-05-22T15-30-47_069-jvmRun1 surefire-20260522153050147_1tmp surefire_0-20260522153050147_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\makse\AppData\Local\Temp\surefire582569195975169913\surefirebooter-20260522153753560_3.jar C:\Users\makse\AppData\Local\Temp\surefire582569195975169913 2026-05-22T15-37-53_004-jvmRun1 surefire-20260522153753560_1tmp surefire_0-20260522153753560_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\makse\OneDrive\Documents\TP ARCHI\devflstk_mast1_test_java\03_exercices\exercice6\target\test-classes;C:\Users\makse\OneDrive\Documents\TP ARCHI\devflstk_mast1_test_java\03_exercices\exercice6\target\classes;C:\Users\makse\.m2\repository\org\junit\jupiter\junit-jupiter\6.0.3\junit-jupiter-6.0.3.jar;C:\Users\makse\.m2\repository\org\junit\jupiter\junit-jupiter-api\6.0.3\junit-jupiter-api-6.0.3.jar;C:\Users\makse\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\makse\.m2\repository\org\junit\platform\junit-platform-commons\6.0.3\junit-platform-commons-6.0.3.jar;C:\Users\makse\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\makse\.m2\repository\org\jspecify\jspecify\1.0.0\jspecify-1.0.0.jar;C:\Users\makse\.m2\repository\org\junit\jupiter\junit-jupiter-params\6.0.3\junit-jupiter-params-6.0.3.jar;C:\Users\makse\.m2\repository\org\junit\jupiter\junit-jupiter-engine\6.0.3\junit-jupiter-engine-6.0.3.jar;C:\Users\makse\.m2\repository\org\junit\platform\junit-platform-engine\6.0.3\junit-platform-engine-6.0.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -29,7 +29,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\makse\AppData\Local\Temp\surefire4370666334231103780\surefirebooter-20260522153050147_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\makse\AppData\Local\Temp\surefire582569195975169913\surefirebooter-20260522153753560_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.18+8"/>
@@ -57,12 +57,11 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="rechercheInsensibleCasse" classname="com.example.RechercheVilleTest" time="0.437"/>
-  <testcase name="rechercheVaRetourneValenceEtVancouver" classname="com.example.RechercheVilleTest" time="0.011"/>
-  <testcase name="recherchePartielle_apeRetourneBudapest" classname="com.example.RechercheVilleTest" time="0.007"/>
-  <testcase name="rechercheParis_retourneParis" classname="com.example.RechercheVilleTest" time="0.017"/>
-  <testcase name="rechercheMoinsDe2Caracteres_leveUneException" classname="com.example.RechercheVilleTest" time="0.011"/>
-  <testcase name="rechercheAucunResultat_retourneListeVide" classname="com.example.RechercheVilleTest" time="0.003"/>
-  <testcase name="rechercheNull_leveUneException" classname="com.example.RechercheVilleTest" time="0.003"/>
-  <testcase name="rechercheEtoile_retourneToutesLesVilles" classname="com.example.RechercheVilleTest" time="0.006"/>
+  <testcase name="rechercheInsensibleCasse" classname="com.example.RechercheVilleTest" time="0.176"/>
+  <testcase name="rechercheVaRetourneValenceEtVancouver" classname="com.example.RechercheVilleTest" time="0.009"/>
+  <testcase name="rechercheParis_retourneParis" classname="com.example.RechercheVilleTest" time="0.008"/>
+  <testcase name="rechercheMoinsDe2Caracteres_leveUneException" classname="com.example.RechercheVilleTest" time="0.006"/>
+  <testcase name="recherchePartieDuNom" classname="com.example.RechercheVilleTest" time="0.011"/>
+  <testcase name="rechercheNull_leveUneException" classname="com.example.RechercheVilleTest" time="0.005"/>
+  <testcase name="rechercheEtoile_retourneToutesLesVilles" classname="com.example.RechercheVilleTest" time="0.005"/>
 </testsuite>

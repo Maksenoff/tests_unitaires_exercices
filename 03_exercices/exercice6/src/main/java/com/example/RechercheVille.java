@@ -29,7 +29,9 @@ public class RechercheVille {
         String motLower = mot.toLowerCase();
 
         for (String ville : villes) {
-            if (ville.toLowerCase().contains(motLower)) {
+            String villeLower = ville.toLowerCase();
+            boolean found = villeLower.contains(motLower);
+            if (found) {
                 resultats.add(ville);
             }
         }

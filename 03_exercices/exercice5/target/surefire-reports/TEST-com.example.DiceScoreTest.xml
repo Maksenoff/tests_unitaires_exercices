@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.example.DiceScoreTest" time="5.907" tests="5" errors="0" skipped="0" failures="0" flakes="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.example.DiceScoreTest" time="4.931" tests="4" errors="0" skipped="0" failures="0" flakes="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.18.8-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\makse\AppData\Local\Temp\surefire6717213867672172558\surefirebooter-20260522152936836_3.jar C:\Users\makse\AppData\Local\Temp\surefire6717213867672172558 2026-05-22T15-29-36_301-jvmRun1 surefire-20260522152936836_1tmp surefire_0-20260522152936836_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\makse\AppData\Local\Temp\surefire17820960623582975707\surefirebooter-20260522153733058_3.jar C:\Users\makse\AppData\Local\Temp\surefire17820960623582975707 2026-05-22T15-37-32_522-jvmRun1 surefire-20260522153733058_1tmp surefire_0-20260522153733058_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\makse\OneDrive\Documents\TP ARCHI\devflstk_mast1_test_java\03_exercices\exercice5\target\test-classes;C:\Users\makse\OneDrive\Documents\TP ARCHI\devflstk_mast1_test_java\03_exercices\exercice5\target\classes;C:\Users\makse\.m2\repository\org\junit\jupiter\junit-jupiter\6.0.3\junit-jupiter-6.0.3.jar;C:\Users\makse\.m2\repository\org\junit\jupiter\junit-jupiter-api\6.0.3\junit-jupiter-api-6.0.3.jar;C:\Users\makse\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\makse\.m2\repository\org\junit\platform\junit-platform-commons\6.0.3\junit-platform-commons-6.0.3.jar;C:\Users\makse\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\makse\.m2\repository\org\jspecify\jspecify\1.0.0\jspecify-1.0.0.jar;C:\Users\makse\.m2\repository\org\junit\jupiter\junit-jupiter-params\6.0.3\junit-jupiter-params-6.0.3.jar;C:\Users\makse\.m2\repository\org\junit\jupiter\junit-jupiter-engine\6.0.3\junit-jupiter-engine-6.0.3.jar;C:\Users\makse\.m2\repository\org\junit\platform\junit-platform-engine\6.0.3\junit-platform-engine-6.0.3.jar;C:\Users\makse\.m2\repository\org\mockito\mockito-junit-jupiter\5.23.0\mockito-junit-jupiter-5.23.0.jar;C:\Users\makse\.m2\repository\org\mockito\mockito-core\5.23.0\mockito-core-5.23.0.jar;C:\Users\makse\.m2\repository\net\bytebuddy\byte-buddy\1.17.7\byte-buddy-1.17.7.jar;C:\Users\makse\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.7\byte-buddy-agent-1.17.7.jar;C:\Users\makse\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\makse\AppData\Local\Temp\surefire6717213867672172558\surefirebooter-20260522152936836_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\makse\AppData\Local\Temp\surefire17820960623582975707\surefirebooter-20260522153733058_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.18+8"/>
@@ -58,9 +58,8 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="deuxDesIdentiquesRetourneValeurX2Plus10" classname="com.example.DiceScoreTest" time="5.561"/>
-  <testcase name="desDifferents_retourneLePlusGrand" classname="com.example.DiceScoreTest" time="0.021"/>
-  <testcase name="desDifferents_premierPlusGrand" classname="com.example.DiceScoreTest" time="0.014"/>
-  <testcase name="desIdentiquesA1_retourne12" classname="com.example.DiceScoreTest" time="0.02"/>
-  <testcase name="deuxDesSix_retourne30" classname="com.example.DiceScoreTest" time="0.02"/>
+  <testcase name="scoreMaxQuandDesDifferents" classname="com.example.DiceScoreTest" time="4.786"/>
+  <testcase name="deuxDesIdentiquesRetourneValeurX2Plus10" classname="com.example.DiceScoreTest" time="0.011"/>
+  <testcase name="desDifferents_premierPlusGrand" classname="com.example.DiceScoreTest" time="0.022"/>
+  <testcase name="deuxDesSix_retourne30" classname="com.example.DiceScoreTest" time="0.009"/>
 </testsuite>

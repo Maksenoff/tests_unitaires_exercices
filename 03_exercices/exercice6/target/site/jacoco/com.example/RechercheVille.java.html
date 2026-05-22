@@ -29,12 +29,14 @@ public class RechercheVille {
 <span class="fc" id="L29">        String motLower = mot.toLowerCase();</span>
 
 <span class="fc bfc" id="L31" title="All 2 branches covered.">        for (String ville : villes) {</span>
-<span class="fc bfc" id="L32" title="All 2 branches covered.">            if (ville.toLowerCase().contains(motLower)) {</span>
-<span class="fc" id="L33">                resultats.add(ville);</span>
+<span class="fc" id="L32">            String villeLower = ville.toLowerCase();</span>
+<span class="fc" id="L33">            boolean found = villeLower.contains(motLower);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            if (found) {</span>
+<span class="fc" id="L35">                resultats.add(ville);</span>
             }
-<span class="fc" id="L35">        }</span>
+<span class="fc" id="L37">        }</span>
 
-<span class="fc" id="L37">        return resultats;</span>
+<span class="fc" id="L39">        return resultats;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
