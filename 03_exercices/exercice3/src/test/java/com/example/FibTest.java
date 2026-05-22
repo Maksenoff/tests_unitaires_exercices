@@ -1,109 +1,65 @@
 package com.example;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class FibTest {
-    private Fib fib;
+import static org.junit.jupiter.api.Assertions.*;
+
+class FibTest {
+
+    // --- Range 1 ---
 
     @Test
-    public void shouldReturnNonEmptyListWhenRangeIsOne(){
-        //Arrange
-        int range = 1;
-        fib = new Fib(range);
-
-        //Act
+    void range1_resultIsNotEmpty() {
+        Fib fib = new Fib(1);
         List<Integer> result = fib.getFibSeries();
-
-        //Assert
-        Assertions.assertFalse(result.isEmpty());
+        assertFalse(result.isEmpty());
     }
 
     @Test
-    public void shouldContainZeroWhenRangeIsOne(){
-        //Arrange
-        int range = 1;
-        fib = new Fib(range);
-
-        //Act
+    void range1_resultContainsOnlyZero() {
+        Fib fib = new Fib(1);
         List<Integer> result = fib.getFibSeries();
+        assertEquals(List.of(0), result);
+    }
 
-        //Assert
-        Assertions.assertTrue(result.contains(0));
+    // --- Range 6 ---
+
+    @Test
+    void range6_resultContains3() {
+        Fib fib = new Fib(6);
+        List<Integer> result = fib.getFibSeries();
+        assertTrue(result.contains(3));
     }
 
     @Test
-    public void shouldContainThreeWhenRangeIsSix(){
-        //Arrange
-        int range = 6;
-        fib = new Fib(range);
-
-        //Act
+    void range6_resultHas6Elements() {
+        Fib fib = new Fib(6);
         List<Integer> result = fib.getFibSeries();
-
-        //Assert
-        Assertions.assertTrue(result.contains(3));
+        assertEquals(6, result.size());
     }
 
     @Test
-    public void shouldReturnSixElementsWhenRangeIsSix(){
-        //Arrange
-        int range = 6;
-        int resultSize = 6;
-        fib = new Fib(range);
-
-        //Act
+    void range6_resultDoesNotContain4() {
+        Fib fib = new Fib(6);
         List<Integer> result = fib.getFibSeries();
-
-        //Assert
-        Assertions.assertEquals(resultSize,result.size());
+        assertFalse(result.contains(4));
     }
 
     @Test
-    public void shouldNotContainFourWhenRangeIsSix(){
-        //Arrange
-        int range = 6;
-        fib = new Fib(range);
-
-        //Act
+    void range6_resultMatchesFibSequence() {
+        Fib fib = new Fib(6);
         List<Integer> result = fib.getFibSeries();
-
-        //Assert
-        Assertions.assertFalse(result.contains(4));
+        assertEquals(List.of(0, 1, 1, 2, 3, 5), result);
     }
 
     @Test
-    public void shouldReturnExpectedFibonacciSeriesWhenRangeIsSix(){
-        //Arrange
-        List<Integer> resultAwait = List.of(0,1,1,2,3,5);
-        int range = 6;
-        fib = new Fib(range);
-
-        //Act
+    void range6_resultIsSortedAscending() {
+        Fib fib = new Fib(6);
         List<Integer> result = fib.getFibSeries();
-
-        //Assert
-        Assertions.assertEquals(resultAwait,result);
-
+        for (int i = 0; i < result.size() - 1; i++) {
+            assertTrue(result.get(i) <= result.get(i + 1));
+        }
     }
-
-    @Test
-    public void shouldReturnSortedAscendingSeriesWhenRangeIsSix(){
-        //Arrange
-        int range = 6;
-        fib = new Fib(range);
-
-        //Act
-        List<Integer> result = fib.getFibSeries();
-        List<Integer> expected = new ArrayList<>(result);
-        expected.sort(null);
-//        Collections.sort(expected);
-
-        //Assert
-        Assertions.assertEquals(expected,result);
-    }
-
 }

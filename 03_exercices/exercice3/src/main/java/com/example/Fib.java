@@ -3,7 +3,9 @@ package com.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fib {
+public class Fib
+{
+
     private final int range;
 
     public Fib(int r)
