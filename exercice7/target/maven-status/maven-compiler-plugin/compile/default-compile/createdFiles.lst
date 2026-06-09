@@ -1,0 +1,8 @@
+com\example\CommandeService$1.class
+com\example\CommandeService.class
+com\example\CommandeException.class
+com\example\Commande.class
+com\example\Produit.class
+com\example\ProduitRepository.class
+com\example\TypeClient.class
+com\example\RecuCommande.class

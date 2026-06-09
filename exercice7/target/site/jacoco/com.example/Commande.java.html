@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Commande.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">exercice7</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">Commande.java</span></div><h1>Commande.java</h1><pre class="source lang-java linenums">package com.example;
+
+public class Commande {
+    private final String emailClient;
+    private final String referenceProduit;
+    private final int quantite;
+    private final TypeClient typeClient;
+
+<span class="fc" id="L9">    public Commande(String emailClient, String referenceProduit, int quantite, TypeClient typeClient) {</span>
+<span class="fc" id="L10">        this.emailClient = emailClient;</span>
+<span class="fc" id="L11">        this.referenceProduit = referenceProduit;</span>
+<span class="fc" id="L12">        this.quantite = quantite;</span>
+<span class="fc" id="L13">        this.typeClient = typeClient;</span>
+<span class="fc" id="L14">    }</span>
+
+<span class="nc" id="L16">    public String getEmailClient() { return emailClient; }</span>
+<span class="fc" id="L17">    public String getReferenceProduit() { return referenceProduit; }</span>
+<span class="fc" id="L18">    public int getQuantite() { return quantite; }</span>
+<span class="fc" id="L19">    public TypeClient getTypeClient() { return typeClient; }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>
