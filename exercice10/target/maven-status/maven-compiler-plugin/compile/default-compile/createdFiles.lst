@@ -1,0 +1,16 @@
+com\example\UserService.class
+com\example\ConfirmationAccount.class
+com\example\OrderService.class
+com\example\ProductService.class
+com\example\UserRepository.class
+com\example\User.class
+com\example\ProductNotInOrderException.class
+com\example\InvalidCredentialsException.class
+com\example\Order.class
+com\example\Product.class
+com\example\ConfirmationOrder.class
+com\example\UserAlreadyExistsException.class
+com\example\ProductRepository.class
+com\example\OrderRepository.class
+com\example\OrderItem.class
+com\example\OrderNotFoundException.class
