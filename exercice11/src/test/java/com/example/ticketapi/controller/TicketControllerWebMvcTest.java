@@ -32,11 +32,9 @@ class TicketControllerWebMvcTest {
 
     @Test
     void shouldReturnCreated_whenTicketIsValid() throws Exception {
-        // Arrange
         when(service.create("Problème réseau", TicketPriority.HIGH))
                 .thenReturn(new Ticket(1L, "Problème réseau", TicketPriority.HIGH, TicketStatus.OPEN));
 
-        // Act + Assert
         mockMvc.perform(post("/api/tickets")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"title\":\"Problème réseau\",\"priority\":\"HIGH\"}"))
@@ -66,11 +64,9 @@ class TicketControllerWebMvcTest {
 
     @Test
     void shouldReturnOk_whenTicketExists() throws Exception {
-        // Arrange
         when(service.getById(1L))
                 .thenReturn(new Ticket(1L, "Bug", TicketPriority.LOW, TicketStatus.OPEN));
 
-        // Act + Assert
         mockMvc.perform(get("/api/tickets/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
@@ -79,10 +75,8 @@ class TicketControllerWebMvcTest {
 
     @Test
     void shouldReturnNotFound_whenTicketDoesNotExist() throws Exception {
-        // Arrange
         when(service.getById(99L)).thenThrow(new TicketNotFoundException(99L));
 
-        // Act + Assert
         mockMvc.perform(get("/api/tickets/99"))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.status").value(404));
@@ -90,11 +84,9 @@ class TicketControllerWebMvcTest {
 
     @Test
     void shouldReturnConflict_whenStatusTransitionIsInvalid() throws Exception {
-        // Arrange
         when(service.updateStatus(1L, TicketStatus.OPEN))
                 .thenThrow(new InvalidStatusTransitionException(TicketStatus.RESOLVED, TicketStatus.OPEN));
 
-        // Act + Assert
         mockMvc.perform(patch("/api/tickets/1/status")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"status\":\"OPEN\"}"))

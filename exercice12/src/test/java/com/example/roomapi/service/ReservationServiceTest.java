@@ -43,43 +43,35 @@ class ReservationServiceTest {
 
     @Test
     void shouldCreateReservation_whenRoomExistsAndSlotIsFree() {
-        // Arrange
         Room room = new Room(1L, "Salle A", 10);
         Reservation expected = new Reservation(1L, 1L, "Alice", start, end, ReservationStatus.CONFIRMED);
         when(roomRepository.findById(1L)).thenReturn(Optional.of(room));
         when(reservationRepository.findByRoomId(1L)).thenReturn(List.of());
         when(reservationRepository.save(eq(1L), eq("Alice"), eq(start), eq(end), eq(ReservationStatus.CONFIRMED))).thenReturn(expected);
 
-        // Act
         Reservation result = service.create(1L, "Alice", start, end);
 
-        // Assert
         assertEquals(1L, result.id());
         assertEquals(ReservationStatus.CONFIRMED, result.status());
     }
 
     @Test
     void shouldThrowNotFoundException_whenRoomDoesNotExist() {
-        // Arrange
         when(roomRepository.findById(99L)).thenReturn(Optional.empty());
 
-        // Act + Assert
         assertThrows(RoomNotFoundException.class, () -> service.create(99L, "Alice", start, end));
     }
 
     @Test
     void shouldThrowException_whenEndTimeIsBeforeStartTime() {
-        // Arrange
         Room room = new Room(1L, "Salle A", 10);
         when(roomRepository.findById(1L)).thenReturn(Optional.of(room));
 
-        // Act + Assert
         assertThrows(IllegalArgumentException.class, () -> service.create(1L, "Alice", end, start));
     }
 
     @Test
     void shouldThrowConflict_whenSlotOverlapsExistingReservation() {
-        // Arrange
         Room room = new Room(1L, "Salle A", 10);
         Reservation existing = new Reservation(1L, 1L, "Bob", start, end, ReservationStatus.CONFIRMED);
         when(roomRepository.findById(1L)).thenReturn(Optional.of(room));
@@ -88,41 +80,33 @@ class ReservationServiceTest {
         LocalDateTime newStart = start.plusMinutes(30);
         LocalDateTime newEnd = end.plusMinutes(30);
 
-        // Act + Assert
         assertThrows(SlotConflictException.class, () -> service.create(1L, "Alice", newStart, newEnd));
     }
 
     @Test
     void shouldCancelReservation_whenStatusIsConfirmed() {
-        // Arrange
         Reservation reservation = new Reservation(1L, 1L, "Alice", start, end, ReservationStatus.CONFIRMED);
         Reservation cancelled = reservation.withStatus(ReservationStatus.CANCELLED);
         when(reservationRepository.findById(1L)).thenReturn(Optional.of(reservation));
         when(reservationRepository.update(cancelled)).thenReturn(cancelled);
 
-        // Act
         Reservation result = service.cancel(1L);
 
-        // Assert
         assertEquals(ReservationStatus.CANCELLED, result.status());
     }
 
     @Test
     void shouldThrowConflict_whenCancellingAlreadyCancelledReservation() {
-        // Arrange
         Reservation reservation = new Reservation(1L, 1L, "Alice", start, end, ReservationStatus.CANCELLED);
         when(reservationRepository.findById(1L)).thenReturn(Optional.of(reservation));
 
-        // Act + Assert
         assertThrows(AlreadyCancelledException.class, () -> service.cancel(1L));
     }
 
     @Test
     void shouldThrowNotFoundException_whenReservationDoesNotExist() {
-        // Arrange
         when(reservationRepository.findById(99L)).thenReturn(Optional.empty());
 
-        // Act + Assert
         assertThrows(ReservationNotFoundException.class, () -> service.getById(99L));
     }
 }

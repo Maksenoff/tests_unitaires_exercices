@@ -40,10 +40,8 @@ class RoomControllerWebMvcTest {
 
     @Test
     void shouldReturnCreated_whenRoomIsValid() throws Exception {
-        // Arrange
         when(roomService.create("Salle A", 10)).thenReturn(new Room(1L, "Salle A", 10));
 
-        // Act + Assert
         mockMvc.perform(post("/api/rooms")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"name\":\"Salle A\",\"capacity\":10}"))
@@ -63,13 +61,11 @@ class RoomControllerWebMvcTest {
 
     @Test
     void shouldReturnCreated_whenReservationIsValid() throws Exception {
-        // Arrange
         LocalDateTime start = LocalDateTime.of(2026, 7, 1, 9, 0);
         LocalDateTime end = LocalDateTime.of(2026, 7, 1, 10, 0);
         Reservation reservation = new Reservation(1L, 1L, "Alice", start, end, ReservationStatus.CONFIRMED);
         when(reservationService.create(eq(1L), eq("Alice"), any(), any())).thenReturn(reservation);
 
-        // Act + Assert
         mockMvc.perform(post("/api/reservations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"roomId\":1,\"personName\":\"Alice\",\"startTime\":\"2026-07-01T09:00:00\",\"endTime\":\"2026-07-01T10:00:00\"}"))
@@ -80,10 +76,8 @@ class RoomControllerWebMvcTest {
 
     @Test
     void shouldReturnNotFound_whenReservationDoesNotExist() throws Exception {
-        // Arrange
         when(reservationService.getById(99L)).thenThrow(new ReservationNotFoundException(99L));
 
-        // Act + Assert
         mockMvc.perform(get("/api/reservations/99"))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.status").value(404));
@@ -91,11 +85,9 @@ class RoomControllerWebMvcTest {
 
     @Test
     void shouldReturnNotFound_whenRoomDoesNotExistForReservation() throws Exception {
-        // Arrange
         when(reservationService.create(eq(99L), any(), any(), any()))
                 .thenThrow(new RoomNotFoundException(99L));
 
-        // Act + Assert
         mockMvc.perform(post("/api/reservations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"roomId\":99,\"personName\":\"Alice\",\"startTime\":\"2026-07-01T09:00:00\",\"endTime\":\"2026-07-01T10:00:00\"}"))
@@ -105,11 +97,9 @@ class RoomControllerWebMvcTest {
 
     @Test
     void shouldReturnConflict_whenSlotIsAlreadyBooked() throws Exception {
-        // Arrange
         when(reservationService.create(eq(1L), any(), any(), any()))
                 .thenThrow(new SlotConflictException());
 
-        // Act + Assert
         mockMvc.perform(post("/api/reservations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"roomId\":1,\"personName\":\"Alice\",\"startTime\":\"2026-07-01T09:00:00\",\"endTime\":\"2026-07-01T10:00:00\"}"))
