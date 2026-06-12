@@ -1,0 +1,5 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+demo-api-spring-tdd-bdd,com.example.demoapi.service,DemoItemService,4,40,1,3,2,9,2,6,1,5
+demo-api-spring-tdd-bdd,com.example.demoapi.controller,DemoApiExceptionHandler,7,31,0,0,3,13,1,4,1,4
+demo-api-spring-tdd-bdd,com.example.demoapi.controller,DemoItemController,6,43,0,0,2,15,1,4,1,4
+demo-api-spring-tdd-bdd,com.example.demoapi.repository,InMemoryDemoItemRepository,0,60,0,0,0,15,0,5,0,5

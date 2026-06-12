@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DemoItemController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo-api-spring-tdd-bdd</a> &gt; <a href="index.source.html" class="el_package">com.example.demoapi.controller</a> &gt; <span class="el_source">DemoItemController.java</span></div><h1>DemoItemController.java</h1><pre class="source lang-java linenums">package com.example.demoapi.controller;
+
+import com.example.demoapi.model.CreateDemoItemRequest;
+import com.example.demoapi.model.DemoItemResponse;
+import com.example.demoapi.service.DemoItemService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URI;
+import java.util.List;
+
+/**
+ * Couche web REST.
+ *
+ * @RestController indique que les méthodes renvoient directement des réponses HTTP/JSON.
+ * @RequestMapping définit le préfixe commun des URLs de ce contrôleur.
+ */
+@RestController
+@RequestMapping(&quot;/api/demo-items&quot;)
+public class DemoItemController {
+
+    private final DemoItemService service;
+
+<span class="fc" id="L31">    public DemoItemController(DemoItemService service) {</span>
+<span class="fc" id="L32">        this.service = service;</span>
+<span class="fc" id="L33">    }</span>
+
+    /**
+     * POST /api/demo-items
+     *
+     * @RequestBody lit le JSON envoyé par le client.
+     * @Valid déclenche la validation des annotations présentes dans CreateDemoItemRequest.
+     */
+    @PostMapping
+    public ResponseEntity&lt;DemoItemResponse&gt; create(@Valid @RequestBody CreateDemoItemRequest request) {
+<span class="fc" id="L43">        var createdItem = service.create(request.label());</span>
+<span class="fc" id="L44">        var response = DemoItemResponse.from(createdItem);</span>
+
+<span class="fc" id="L46">        return ResponseEntity</span>
+<span class="fc" id="L47">                .created(URI.create(&quot;/api/demo-items/&quot; + response.id()))</span>
+<span class="fc" id="L48">                .body(response);</span>
+    }
+
+    /**
+     * GET /api/demo-items/{id}
+     *
+     * @PathVariable récupère la valeur dynamique présente dans l'URL.
+     */
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;DemoItemResponse&gt; getById(@PathVariable Long id) {
+<span class="fc" id="L58">        var item = service.getById(id);</span>
+<span class="fc" id="L59">        return ResponseEntity.ok(DemoItemResponse.from(item));</span>
+    }
+
+    /**
+     * GET /api/demo-items
+     *
+     * Retourne tous les éléments. Utile pour montrer un test HTTP simple en intégration.
+     */
+    @GetMapping
+    public ResponseEntity&lt;List&lt;DemoItemResponse&gt;&gt; findAll() {
+<span class="fc" id="L69">        var responses = service.findAll()</span>
+<span class="fc" id="L70">                .stream()</span>
+<span class="fc" id="L71">                .map(DemoItemResponse::from)</span>
+<span class="fc" id="L72">                .toList();</span>
+
+<span class="fc" id="L74">        return ResponseEntity.ok(responses);</span>
+    }
+
+    /**
+     * DELETE /api/demo-items
+     *
+     * Endpoint pratique pour remettre l'API à zéro dans la démo et les scénarios BDD.
+     */
+    @DeleteMapping
+    public ResponseEntity&lt;Void&gt; deleteAll() {
+<span class="nc" id="L84">        service.deleteAll();</span>
+<span class="nc" id="L85">        return ResponseEntity.noContent().build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
