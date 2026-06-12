@@ -1,0 +1,6 @@
+com\example\roomapi\bdd\RunCucumberTest.class
+com\example\roomapi\controller\RoomControllerWebMvcTest.class
+com\example\roomapi\bdd\RoomApiStepDefinitions.class
+com\example\roomapi\integration\RoomApiIntegrationTest.class
+com\example\roomapi\service\ReservationServiceTest.class
+com\example\roomapi\bdd\CucumberSpringConfiguration.class

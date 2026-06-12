@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InMemoryReservationRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">room-api</a> &gt; <a href="index.source.html" class="el_package">com.example.roomapi.repository</a> &gt; <span class="el_source">InMemoryReservationRepository.java</span></div><h1>InMemoryReservationRepository.java</h1><pre class="source lang-java linenums">package com.example.roomapi.repository;
+
+import com.example.roomapi.model.Reservation;
+import com.example.roomapi.model.ReservationStatus;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
+
+@Repository
+<span class="fc" id="L17">public class InMemoryReservationRepository implements ReservationRepository {</span>
+
+<span class="fc" id="L19">    private final AtomicLong sequence = new AtomicLong(0);</span>
+<span class="fc" id="L20">    private final Map&lt;Long, Reservation&gt; reservations = new ConcurrentHashMap&lt;&gt;();</span>
+
+    @Override
+    public Reservation save(Long roomId, String personName, LocalDateTime startTime, LocalDateTime endTime, ReservationStatus status) {
+<span class="fc" id="L24">        Long id = sequence.incrementAndGet();</span>
+<span class="fc" id="L25">        Reservation reservation = new Reservation(id, roomId, personName, startTime, endTime, status);</span>
+<span class="fc" id="L26">        reservations.put(id, reservation);</span>
+<span class="fc" id="L27">        return reservation;</span>
+    }
+
+    @Override
+    public Reservation update(Reservation reservation) {
+<span class="fc" id="L32">        reservations.put(reservation.id(), reservation);</span>
+<span class="fc" id="L33">        return reservation;</span>
+    }
+
+    @Override
+    public Optional&lt;Reservation&gt; findById(Long id) {
+<span class="fc" id="L38">        return Optional.ofNullable(reservations.get(id));</span>
+    }
+
+    @Override
+    public List&lt;Reservation&gt; findByRoomId(Long roomId) {
+<span class="fc" id="L43">        return reservations.values().stream()</span>
+<span class="fc" id="L44">                .filter(r -&gt; r.roomId().equals(roomId))</span>
+<span class="fc" id="L45">                .collect(Collectors.toList());</span>
+    }
+
+    @Override
+    public void deleteAll() {
+<span class="fc" id="L50">        reservations.clear();</span>
+<span class="fc" id="L51">        sequence.set(0);</span>
+<span class="fc" id="L52">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

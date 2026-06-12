@@ -1,0 +1,5 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+ticket-api,com.example.ticketapi.service,TicketService,17,96,4,15,4,22,6,12,2,6
+ticket-api,com.example.ticketapi.controller,TicketController,11,45,0,0,4,12,1,4,1,4
+ticket-api,com.example.ticketapi.controller,TicketApiExceptionHandler,7,39,0,0,2,11,1,5,1,5
+ticket-api,com.example.ticketapi.repository,InMemoryTicketRepository,12,59,0,0,4,13,1,5,1,5

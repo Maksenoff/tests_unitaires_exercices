@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TicketController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ticket-api</a> &gt; <a href="index.source.html" class="el_package">com.example.ticketapi.controller</a> &gt; <span class="el_source">TicketController.java</span></div><h1>TicketController.java</h1><pre class="source lang-java linenums">package com.example.ticketapi.controller;
+
+import com.example.ticketapi.model.CreateTicketRequest;
+import com.example.ticketapi.model.TicketResponse;
+import com.example.ticketapi.model.UpdateTicketStatusRequest;
+import com.example.ticketapi.service.TicketService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URI;
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;/api/tickets&quot;)
+public class TicketController {
+
+    private final TicketService service;
+
+<span class="fc" id="L26">    public TicketController(TicketService service) {</span>
+<span class="fc" id="L27">        this.service = service;</span>
+<span class="fc" id="L28">    }</span>
+
+    @PostMapping
+    public ResponseEntity&lt;TicketResponse&gt; create(@Valid @RequestBody CreateTicketRequest request) {
+<span class="fc" id="L32">        var ticket = service.create(request.title(), request.priority());</span>
+<span class="fc" id="L33">        var response = TicketResponse.from(ticket);</span>
+<span class="fc" id="L34">        return ResponseEntity</span>
+<span class="fc" id="L35">                .created(URI.create(&quot;/api/tickets/&quot; + response.id()))</span>
+<span class="fc" id="L36">                .body(response);</span>
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;TicketResponse&gt; getById(@PathVariable Long id) {
+<span class="fc" id="L41">        var ticket = service.getById(id);</span>
+<span class="fc" id="L42">        return ResponseEntity.ok(TicketResponse.from(ticket));</span>
+    }
+
+    @GetMapping
+    public ResponseEntity&lt;List&lt;TicketResponse&gt;&gt; findAll() {
+<span class="nc" id="L47">        var responses = service.findAll().stream()</span>
+<span class="nc" id="L48">                .map(TicketResponse::from)</span>
+<span class="nc" id="L49">                .toList();</span>
+<span class="nc" id="L50">        return ResponseEntity.ok(responses);</span>
+    }
+
+    @PatchMapping(&quot;/{id}/status&quot;)
+    public ResponseEntity&lt;TicketResponse&gt; updateStatus(@PathVariable Long id, @Valid @RequestBody UpdateTicketStatusRequest request) {
+<span class="fc" id="L55">        var ticket = service.updateStatus(id, request.status());</span>
+<span class="fc" id="L56">        return ResponseEntity.ok(TicketResponse.from(ticket));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

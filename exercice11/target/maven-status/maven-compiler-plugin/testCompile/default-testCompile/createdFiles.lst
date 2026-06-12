@@ -1,0 +1,6 @@
+com\example\ticketapi\integration\TicketApiIntegrationTest.class
+com\example\ticketapi\service\TicketServiceTest.class
+com\example\ticketapi\controller\TicketControllerWebMvcTest.class
+com\example\ticketapi\bdd\RunCucumberTest.class
+com\example\ticketapi\bdd\CucumberSpringConfiguration.class
+com\example\ticketapi\bdd\TicketApiStepDefinitions.class
