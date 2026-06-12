@@ -14,7 +14,6 @@ import static org.mockito.Mockito.*;
 
 public class ShopSteps {
 
-    // Services
     private UserRepository userRepository;
     private UserService userService;
     private ProductRepository productRepository;
@@ -22,14 +21,11 @@ public class ShopSteps {
     private OrderRepository orderRepository;
     private OrderService orderService;
 
-    // Résultats
     private ConfirmationAccount confirmationAccount;
     private ConfirmationOrder confirmationOrder;
     private List<Product> productResults;
     private Order currentOrder;
     private Exception exception;
-
-    // ─── Création de compte ───────────────────────────────────────────────
 
     @Given("je suis sur le formulaire d'inscription")
     public void jeSuisSurLeFormulaireInscription() {
@@ -73,8 +69,6 @@ public class ShopSteps {
         assertEquals(message, exception.getMessage());
     }
 
-    // ─── Connexion ────────────────────────────────────────────────────────
-
     @Given("un utilisateur {string} avec le mot de passe {string} existe")
     public void unUtilisateurAvecMotDePasseExiste(String username, String password) {
         userRepository = mock(UserRepository.class);
@@ -103,8 +97,6 @@ public class ShopSteps {
         assertNotNull(exception);
         assertEquals(message, exception.getMessage());
     }
-
-    // ─── Recherche de produits ────────────────────────────────────────────
 
     @Given("des produits contenant {string} sont disponibles dans le catalogue")
     public void desProduitsContenant(String keyword) {
@@ -156,8 +148,6 @@ public class ShopSteps {
         );
     }
 
-    // ─── Navigation par catégorie ─────────────────────────────────────────
-
     @Given("des produits de la catégorie {string} sont disponibles")
     public void desProduitsDeCategorie(String category) {
         productRepository = mock(ProductRepository.class);
@@ -181,8 +171,6 @@ public class ShopSteps {
                 assertEquals(category, p.getCategory())
         );
     }
-
-    // ─── Gestion des commandes – setup commun ────────────────────────────
 
     private void initOrderService() {
         if (orderRepository == null) orderRepository = mock(OrderRepository.class);
@@ -225,8 +213,6 @@ public class ShopSteps {
         initOrderService();
     }
 
-    // ─── Ajout à la commande ──────────────────────────────────────────────
-
     @When("j'ajoute le produit {long} à la commande {long}")
     public void jAjouteProduit(long productId, long orderId) {
         exception = null;
@@ -263,8 +249,6 @@ public class ShopSteps {
         assertEquals(message, exception.getMessage());
     }
 
-    // ─── Suppression de la commande ───────────────────────────────────────
-
     @When("je supprime le produit {long} de la commande {long}")
     public void jeSupprimeProduit(long productId, long orderId) {
         exception = null;
@@ -282,8 +266,6 @@ public class ShopSteps {
                 .anyMatch(i -> i.getProduct().getId().equals(productId));
         assertFalse(present, "Le produit id=" + productId + " devrait être retiré de la commande");
     }
-
-    // ─── Validation de commande ───────────────────────────────────────────
 
     @When("je valide la commande {long}")
     public void jeValideCommande(long orderId) {

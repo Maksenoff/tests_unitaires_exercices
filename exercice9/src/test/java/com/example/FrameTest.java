@@ -12,8 +12,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class FrameTest {
 
-    // --- Série standard ---
-
     @Test
     void shouldIncreaseScoreWhenFirstRollIsMadeInStandardFrame() {
         IGenerateur generateur = mock(IGenerateur.class);
@@ -63,8 +61,6 @@ class FrameTest {
 
         assertFalse(result);
     }
-
-    // --- Dernière série ---
 
     @Test
     void shouldIncreaseScoreWhenSecondRollIsMadeAfterStrikeInLastFrame() {
