@@ -1,0 +1,4 @@
+com\example\mediacity\bdd\MediaCityStepDefinitions.class
+com\example\mediacity\service\LoanServiceTest.class
+com\example\mediacity\service\ReservationServiceTest.class
+com\example\mediacity\bdd\RunCucumberTest.class

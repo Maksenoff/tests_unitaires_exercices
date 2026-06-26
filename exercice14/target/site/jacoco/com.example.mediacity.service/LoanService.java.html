@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoanService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mediacity</a> &gt; <a href="index.source.html" class="el_package">com.example.mediacity.service</a> &gt; <span class="el_source">LoanService.java</span></div><h1>LoanService.java</h1><pre class="source lang-java linenums">package com.example.mediacity.service;
+
+import com.example.mediacity.exception.BookAlreadyBorrowedException;
+import com.example.mediacity.exception.LoanNotFoundException;
+import com.example.mediacity.exception.MemberSuspendedException;
+import com.example.mediacity.model.Book;
+import com.example.mediacity.model.Loan;
+import com.example.mediacity.model.Member;
+import com.example.mediacity.repository.LoanRepository;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+public class LoanService {
+
+    private static final int LOAN_DURATION_DAYS = 21;
+<span class="fc" id="L18">    private static final BigDecimal PENALTY_PER_DAY = new BigDecimal(&quot;0.15&quot;);</span>
+    private static final int LATE_DAYS_FOR_IMPORTANT = 3;
+    private static final int MAX_LATE_RETURNS_BEFORE_SUSPENSION = 3;
+
+    private final LoanRepository loanRepository;
+
+<span class="fc" id="L24">    public LoanService(LoanRepository loanRepository) {</span>
+<span class="fc" id="L25">        this.loanRepository = loanRepository;</span>
+<span class="fc" id="L26">    }</span>
+
+    public Loan borrow(Member member, Book book, LocalDate today) {
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (member.suspended()) {</span>
+<span class="fc" id="L30">            throw new MemberSuspendedException(member.name());</span>
+        }
+<span class="fc" id="L32">        boolean alreadyBorrowed = loanRepository.findByBookId(book.id()).stream()</span>
+<span class="fc" id="L33">                .anyMatch(Loan::isActive);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (alreadyBorrowed) {</span>
+<span class="fc" id="L35">            throw new BookAlreadyBorrowedException(book.id());</span>
+        }
+<span class="fc" id="L37">        LocalDate dueDate = today.plusDays(LOAN_DURATION_DAYS);</span>
+<span class="fc" id="L38">        return loanRepository.save(member.id(), book.id(), today, dueDate);</span>
+    }
+
+    public BigDecimal returnBook(Long loanId, LocalDate returnDate) {
+<span class="fc" id="L42">        Loan loan = loanRepository.findById(loanId)</span>
+<span class="fc" id="L43">                .orElseThrow(() -&gt; new LoanNotFoundException(loanId));</span>
+<span class="fc" id="L44">        loanRepository.update(loan.withReturnDate(returnDate));</span>
+<span class="fc" id="L45">        long daysLate = ChronoUnit.DAYS.between(loan.dueDate(), returnDate);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (daysLate &lt;= 0) {</span>
+<span class="fc" id="L47">            return BigDecimal.ZERO;</span>
+        }
+<span class="fc" id="L49">        return PENALTY_PER_DAY.multiply(BigDecimal.valueOf(daysLate));</span>
+    }
+
+    public boolean isBookAvailable(Long bookId) {
+<span class="fc" id="L53">        return loanRepository.findByBookId(bookId).stream().noneMatch(Loan::isActive);</span>
+    }
+
+    public int countLateReturnsInYear(Long memberId, int year) {
+<span class="fc" id="L57">        return (int) loanRepository.findByMemberId(memberId).stream()</span>
+<span class="fc" id="L58">                .filter(Loan::isReturned)</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">                .filter(l -&gt; l.returnDate().getYear() == year)</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">                .filter(l -&gt; ChronoUnit.DAYS.between(l.dueDate(), l.returnDate()) &gt;= LATE_DAYS_FOR_IMPORTANT)</span>
+<span class="fc" id="L61">                .count();</span>
+    }
+
+    public boolean isMemberSuspendedAfterReturn(Member member, LocalDate returnDate, Long loanId) {
+<span class="fc" id="L65">        Loan loan = loanRepository.findById(loanId)</span>
+<span class="pc" id="L66">                .orElseThrow(() -&gt; new LoanNotFoundException(loanId));</span>
+<span class="fc" id="L67">        long daysLate = ChronoUnit.DAYS.between(loan.dueDate(), returnDate);</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (daysLate &gt;= LATE_DAYS_FOR_IMPORTANT) {</span>
+<span class="fc" id="L69">            int newLateCount = member.lateReturnsThisYear() + 1;</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">            return newLateCount &gt;= MAX_LATE_RETURNS_BEFORE_SUSPENSION;</span>
+        }
+<span class="nc" id="L72">        return member.suspended();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

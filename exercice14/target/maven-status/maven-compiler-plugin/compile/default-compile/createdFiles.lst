@@ -1,0 +1,13 @@
+com\example\mediacity\model\Reservation.class
+com\example\mediacity\repository\InMemoryLoanRepository.class
+com\example\mediacity\exception\BookAlreadyBorrowedException.class
+com\example\mediacity\service\LoanService.class
+com\example\mediacity\exception\MemberSuspendedException.class
+com\example\mediacity\repository\ReservationRepository.class
+com\example\mediacity\service\ReservationService.class
+com\example\mediacity\repository\InMemoryReservationRepository.class
+com\example\mediacity\exception\LoanNotFoundException.class
+com\example\mediacity\model\Book.class
+com\example\mediacity\model\Member.class
+com\example\mediacity\repository\LoanRepository.class
+com\example\mediacity\model\Loan.class

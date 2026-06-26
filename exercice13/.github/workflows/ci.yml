@@ -1,0 +1,63 @@
+name: CI - Tests et rapports API bancaire
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  test-and-reports:
+    name: Exécuter les tests et publier les rapports
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code du dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Java 21 avec cache Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+
+      - name: Vérifier Java et Maven
+        run: |
+          java -version
+          mvn -version
+
+      - name: Lancer les tests et générer les rapports
+        run: mvn clean verify
+        working-directory: exercice13
+
+      - name: Publier les rapports Surefire
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: exercice13/target/surefire-reports
+          if-no-files-found: warn
+
+      - name: Publier le rapport JaCoCo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: exercice13/target/site/jacoco
+          if-no-files-found: warn
+
+      - name: Publier les rapports Cucumber
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-reports
+          path: |
+            exercice13/target/cucumber-report.html
+            exercice13/target/cucumber-report.json
+          if-no-files-found: warn
