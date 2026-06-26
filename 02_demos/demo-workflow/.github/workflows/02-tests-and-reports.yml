@@ -1,0 +1,67 @@
+name: 02 - Tests Maven avec rapports
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+  workflow_dispatch:
+
+jobs:
+  test-and-reports:
+    name: Exécuter les tests et publier les rapports
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code du dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Java 21 avec cache Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+
+      - name: Vérifier Java et Maven
+        run: |
+          java -version
+          mvn -version
+
+      - name: Lancer les tests et générer les rapports
+        run: mvn clean verify
+
+      - name: Publier les rapports de tests Maven
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapports-tests-maven
+          path: |
+            target/surefire-reports/**
+            target/failsafe-reports/**
+          if-no-files-found: warn
+
+      - name: Publier le rapport de couverture JaCoCo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-jacoco
+          path: target/site/jacoco/**
+          if-no-files-found: warn
+
+      - name: Publier les rapports Cucumber BDD
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapports-cucumber-bdd
+          path: |
+            target/cucumber-reports/**
+            target/cucumber-report.html
+            target/cucumber.json
+          if-no-files-found: warn

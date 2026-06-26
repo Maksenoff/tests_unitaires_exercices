@@ -1,0 +1,36 @@
+name: 01 - Tests simples Maven
+
+on:
+  # push:
+  #   branches:
+  #     - main
+  #     - master
+  # pull_request:
+  #   branches:
+  #     - main
+  #     - master
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Exécuter les tests Maven
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code du dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Vérifier la version de Java
+        run: java -version
+
+      - name: Vérifier la version de Maven
+        run: mvn -version
+
+      - name: Lancer les tests
+        run: mvn clean test
